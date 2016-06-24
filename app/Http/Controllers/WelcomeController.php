@@ -39,5 +39,11 @@ class WelcomeController extends Controller {
 	{
 		return view('welcome');
 	}
+        
+        public function show_geo()
+	{
+		return view('articles/geo_charts');
+	}
+        
 
 }

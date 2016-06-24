@@ -18,18 +18,18 @@
 						</div>
 					@endif
 
-					<form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/login') }}">
+					<form id="form" class="form-horizontal" role="form" method="POST" action="{{ url('/auth/login') }}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 						<div class="form-group">
-							<label class="col-md-4 control-label">E-Mail Address</label>
+							<label class="col-md-4 control-label"> {{ trans('messages.email') }}</label>
 							<div class="col-md-6">
 								<input type="email" class="form-control" name="email" value="{{ old('email') }}">
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-4 control-label">Password</label>
+							<label class="col-md-4 control-label">{{ trans('messages.password') }}</label>
 							<div class="col-md-6">
 								<input type="password" class="form-control" name="password">
 							</div>
@@ -39,7 +39,7 @@
 							<div class="col-md-6 col-md-offset-4">
 								<div class="checkbox">
 									<label>
-										<input type="checkbox" name="remember"> Remember Me
+										<input type="checkbox" name="remember"> {{ trans('messages.remember') }}
 									</label>
 								</div>
 							</div>
@@ -47,9 +47,9 @@
 
 						<div class="form-group">
 							<div class="col-md-6 col-md-offset-4">
-								<button type="submit" class="btn btn-primary">Login</button>
+								<button type="submit" class="btn btn-primary">{{ trans('messages.login') }}</button>
 
-								<a class="btn btn-link" href="{{ url('/password/email') }}">Forgot Your Password?</a>
+								<a class="btn btn-link" id="login" href="{{ url('/password/email') }}">{{ trans('messages.forgotten') }}</a>
 							</div>
 						</div>
 					</form>
@@ -58,4 +58,50 @@
 		</div>
 	</div>
 </div>
+<script>
+    $(document).ready(function () {
+         
+        var form = $('#form');   
+            
+        $('#login').click(function () {
+            if (!form.valid())
+            {
+                return false;
+            }
+        });
+        
+    form.validate({
+    rules: {
+        email: {
+            required: true,
+            email: true,
+        },
+        password: {
+            required: true,
+        },
+    },
+        highlight: function (element) {
+        $(element).parent().find('.form-control-feedback').removeClass('glyphicon-ok').removeClass('success').addClass('glyphicon-remove').addClass('error');
+        },
+        unhighlight: function (element) {
+        $(element).parent().find('.form-control-feedback').removeClass('glyphicon-remove').removeClass('error').addClass('glyphicon-ok').addClass('success');
+        },
+        messages: {
+                email: {
+                        required: " {{ trans('messages.err3') }} ",
+                        email: " {{ trans('messages.err4') }} ",
+                },
+                password: {
+                        required: " {{ trans('messages.err7') }} "
+                },
+        }    
+
+
+ });
+ 
+ });
+
+
+</script>
+
 @endsection

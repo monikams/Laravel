@@ -1,0 +1,24 @@
+<?php $__env->startSection('content'); ?>
+       
+        <?php if(Session::has('success')): ?>
+          <div>
+             <h2><?php echo Session::get('success'); ?></h2>
+          </div>
+        <?php endif; ?>
+            <div class="secure">Upload form</div>                          
+                <?php echo Form::open(array('url'=>'apply/upload','method'=>'POST', 'files'=>true)); ?>               
+                <div class="form-group"> 
+                    <?php echo Form::file('image'); ?>
+
+                    <p class="errors"><?php echo $errors->first('image'); ?></p>
+                    <?php if(Session::has('error')): ?>
+                    <p class="errors"><?php echo Session::get('error'); ?></p>
+                    <?php endif; ?>   
+                    <?php echo Form::submit('Submit', array('class' => 'btn btn-primary')); ?>                   
+                </div> 
+                <?php echo Form::close(); ?>
+
+          
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

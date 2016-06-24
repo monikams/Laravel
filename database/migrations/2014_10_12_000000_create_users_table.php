@@ -22,7 +22,9 @@ class CreateUsersTable extends Migration {
 			$table->timestamps();
                         $table->string('country', 50);
                         $table->string('time_zone', 50);
+                        
 		});
+               
                 
 	}
 

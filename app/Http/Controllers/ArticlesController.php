@@ -6,6 +6,7 @@ use Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticleRequest;
+use App\User;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -23,9 +24,24 @@ class ArticlesController extends Controller {
         
         public function index()
         {
-           // return  \Auth::user()->name;
-            $articles = Article::latest('published_at')->published()->get();
-            return view('articles.index', compact('articles'));
+          //  return  \Auth::user()->name;  
+            $articles=Article::get();
+
+            //  $articles = Article::get('published_at');
+           
+           // $latest=Article::latest()->first();
+            
+            $code= "<img src='http://www.visionlearning.com/blog/wp-content/uploads/2015/09/ezgif.com-optimize.gif'>";
+            if(Auth::check()) 
+            {
+                 return view('articles.index', compact('articles', 'code'));
+            }
+            else
+            {    
+                 return redirect('../');
+                 
+            }
+            
         }
         
         //public function show($id)

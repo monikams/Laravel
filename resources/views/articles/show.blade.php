@@ -9,7 +9,7 @@
         {{ $article->body }}
     </article>
     
-    @unless($article->tags->isEmpty())
+<!--    @unless($article->tags->isEmpty())
         <h3> Tags: </h3>
         <ul>
             @foreach($article->tags as $tag)
@@ -18,6 +18,6 @@
                 </li>
             @endforeach
         </ul>
-    @endunless
+    @endunless-->
 
 @stop

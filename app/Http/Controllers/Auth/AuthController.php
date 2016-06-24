@@ -4,6 +4,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use DateTimeZone;
+use Illuminate\View\View;
+use Illuminate\Support\Facades\File;
 
 class AuthController extends Controller {
 
@@ -36,5 +41,23 @@ class AuthController extends Controller {
 
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
-
+             
+        public function getRegister()
+        {        
+          $countries = DB::table('countries')->select('country')->get();
+  
+           //  $country = 'Portugal';
+           //$country = ['country'];
+          // $codes = DB::select('select code from countries where country = :country', ['country' => $country]);
+           //var_dump($codes);
+//           $code = $codes[0];
+//           $time_zones=DateTimeZone::listIdentifiers(DateTimeZone::PER_COUNTRY, $code->code);
+//           var_dump($time_zones);
+//           return view('auth.register', compact('countries','time_zones'));
+           return view('auth.register', compact('countries')); 
+        }
+        
+      
+        
+        
 }

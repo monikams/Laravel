@@ -1,7 +1,7 @@
-@extends('app1')
-
-
+@extends('app')
 @section('content')
+
+
 <h1> Articles </h2>
 
 @foreach($articles as $article)
@@ -12,6 +12,11 @@
         
         <div class="body"> {{ $article->body }} </div>
     </article>
+
 @endforeach
 
+<!--<p>{{$code}}</p>
+
+<p>{!!$code !!}</p>-->
 @stop
+

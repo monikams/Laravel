@@ -1,0 +1,22 @@
+<?php $__env->startSection('content'); ?>
+<?php if(Session::has('success')): ?>
+    <div>
+       <h2><?php echo Session::get('success'); ?></h2>
+    </div>
+<?php endif; ?>
+
+<?php if(empty(\DB::table('payment')->where('user_id', \Auth::user()->id)->get())): ?>
+  <h1> You should pay for more file uploads</h1>
+  <?php echo Form::open(array('url'=>'apply/payment','method'=>'POST')); ?>   
+  <?php echo Form::select('size', array('S' => '10MB', 'L' => '100MB')); ?>
+
+  <?php echo Form::select('time', array('M' => '1month', 'Y' => '1year')); ?>
+
+  <?php echo Form::submit('Submit', array('class' => 'btn btn-primary')); ?> 
+  <?php echo Form::close(); ?>
+
+<?php endif; ?>  
+  
+  <?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

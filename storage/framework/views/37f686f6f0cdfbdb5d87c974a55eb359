@@ -1,0 +1,108 @@
+<?php $__env->startSection('content'); ?>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="panel panel-default">
+				<div class="panel-heading">Login</div>
+				<div class="panel-body">
+					<?php if(count($errors) > 0): ?>
+						<div class="alert alert-danger">
+							<strong>Whoops!</strong> There were some problems with your input.<br><br>
+							<ul>
+								<?php foreach($errors->all() as $error): ?>
+									<li><?php echo e($error); ?></li>
+								<?php endforeach; ?>
+							</ul>
+						</div>
+					<?php endif; ?>
+
+					<form id="form" class="form-horizontal" role="form" method="POST" action="<?php echo e(url('/auth/login')); ?>">
+						<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+
+						<div class="form-group">
+							<label class="col-md-4 control-label"> <?php echo e(trans('messages.email')); ?></label>
+							<div class="col-md-6">
+								<input type="email" class="form-control" name="email" value="<?php echo e(old('email')); ?>">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label"><?php echo e(trans('messages.password')); ?></label>
+							<div class="col-md-6">
+								<input type="password" class="form-control" name="password">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-md-6 col-md-offset-4">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" name="remember"> <?php echo e(trans('messages.remember')); ?>
+
+									</label>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-md-6 col-md-offset-4">
+								<button type="submit" class="btn btn-primary"><?php echo e(trans('messages.login')); ?></button>
+
+								<a class="btn btn-link" id="login" href="<?php echo e(url('/password/email')); ?>"><?php echo e(trans('messages.forgotten')); ?></a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+    $(document).ready(function () {
+         
+        var form = $('#form');   
+            
+        $('#login').click(function () {
+            if (!form.valid())
+            {
+                return false;
+            }
+        });
+        
+    form.validate({
+    rules: {
+        email: {
+            required: true,
+            email: true,
+        },
+        password: {
+            required: true,
+        },
+    },
+        highlight: function (element) {
+        $(element).parent().find('.form-control-feedback').removeClass('glyphicon-ok').removeClass('success').addClass('glyphicon-remove').addClass('error');
+        },
+        unhighlight: function (element) {
+        $(element).parent().find('.form-control-feedback').removeClass('glyphicon-remove').removeClass('error').addClass('glyphicon-ok').addClass('success');
+        },
+        messages: {
+                email: {
+                        required: " <?php echo e(trans('messages.err3')); ?> ",
+                        email: " <?php echo e(trans('messages.err4')); ?> ",
+                },
+                password: {
+                        required: " <?php echo e(trans('messages.err7')); ?> "
+                },
+        }    
+
+
+ });
+ 
+ });
+
+
+</script>
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

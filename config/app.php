@@ -52,8 +52,8 @@ return [
 	|
 	*/
 
-	'locale' => 'en',
-
+        'locale' => 'en',
+        
 	/*
 	|--------------------------------------------------------------------------
 	| Application Fallback Locale
@@ -145,6 +145,7 @@ return [
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
                 'Laracasts\Flash\FlashServiceProvider'
+          
 
 	],
 
@@ -195,7 +196,8 @@ return [
 		'View'      => 'Illuminate\Support\Facades\View',
                 'Form'      => 'Illuminate\Html\FormFacade',
                 'HTML'      => 'Illuminate\Html\HtmlFacade',
-                'Flash'     => 'Laracasts\Flash\Flash'
+                'Flash'     => 'Laracasts\Flash\Flash',
+                
 	],
 
 ];

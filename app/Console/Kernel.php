@@ -12,8 +12,10 @@ class Kernel extends ConsoleKernel {
 	 */
 	protected $commands = [
 		'App\Console\Commands\Inspire',
+                'App\Console\Commands\DeleteNotConfirmed',
+                'App\Console\Commands\SendEmails',
+                'App\Console\Commands\CheckUploads'
 	];
-
 	/**
 	 * Define the application's command schedule.
 	 *
@@ -21,9 +23,11 @@ class Kernel extends ConsoleKernel {
 	 * @return void
 	 */
 	protected function schedule(Schedule $schedule)
-	{
-		$schedule->command('inspire')
-				 ->hourly();
+	{        
+             $schedule->command('notconfirmed:delete')->dailyAt('00:10');
+         //    $schedule->command('emails:send')->dailyAt('00:10');
+             $schedule->command('notconfirmed:delete')->dailyAt('00:10');
+             $schedule->command('check:uploads')->dailyAt('07:06');
 	}
 
 }

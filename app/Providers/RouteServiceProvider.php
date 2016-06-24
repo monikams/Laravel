@@ -2,6 +2,7 @@
 
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Http\Request;
 
 class RouteServiceProvider extends ServiceProvider {
 
@@ -33,6 +34,8 @@ class RouteServiceProvider extends ServiceProvider {
 	 * @param  \Illuminate\Routing\Router  $router
 	 * @return void
 	 */
+        
+        
 	public function map(Router $router)
 	{
 		$router->group(['namespace' => $this->namespace], function($router)

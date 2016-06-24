@@ -15,7 +15,6 @@ class PagesController extends Controller {
        $data['last']='Spasova';    
        $firstname='Monika';
        
-       
        return view('about')->with('firstname',$firstname);
        //return view('about')->with($data);
        //return view('about', compact('firstname'));
